@@ -1,0 +1,2 @@
+export PATH=/Applications/ArangoDB.app/Contents/Resources/bin:$PATH
+export POPIT_ARANGODB=`pwd`
