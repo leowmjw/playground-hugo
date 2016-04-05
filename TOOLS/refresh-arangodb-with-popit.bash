@@ -38,11 +38,11 @@ elif [ "${mycat}X" == "ALLX" ]
         # Use httpie to get the top level file of current category
         # DEBUG:
         echo "Downloading http://api.popit.sinarproject.org/en/${curcat}?format=json"
-        # http http://api.popit.sinarproject.org/en/${curcat}?format=json -o ${curcat}-sample.json
+        http "http://api.popit.sinarproject.org/en/${curcat}?format=json" -o ${curcat}-sample.json
         # Use jq to figure out the number ofpages to be loadded
         pages=`cat ${curcat}-sample.json | jq '.num_pages'`
         # DEBUG:
-        # pages=1
+        # pages=3
         
         # DEBUG:
         # echo "Number of pages is ${pages}"
@@ -54,7 +54,7 @@ elif [ "${mycat}X" == "ALLX" ]
             echo "Getting page ${i}  =====>>>>>>>>>"
             # DEBUG:
             echo "Downloading http://api.popit.sinarproject.org/en/${curcat}?format=json&page=${i}"
-            http http://api.popit.sinarproject.org/en/${curcat}?format=json -o ${curcat}-page-${i}.json
+            http "http://api.popit.sinarproject.org/en/${curcat}?format=json&page=${i}" -o ${curcat}-page-${i}.json
             
             # Extract out only results; move the key (ID) to be primary
             # Save as for use by arangodbimp next; with the pattern arangodb-<resource-name>-pg-<current_page>.json
